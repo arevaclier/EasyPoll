@@ -1,0 +1,12 @@
+body {
+    font-family: 'Open Sans', 'Source Sans Pro', sans-serif;
+}
+.poll-highlight-title {
+    text-align: center;
+}
+.poll-title {
+    font-style: italic;
+}
+.poll {
+    border: 1px dashed #60949a;
+}
