@@ -1,9 +1,110 @@
+{%  extends 'EasyPoll/base.html' %}
 {% if latest_question %}
     <ul>
-    {% for question in latest_question %}
-       <li><a href="{% url 'EasyPoll:question' question.id %}">{{ question.text }}</a></li>
-    {% endfor %}
+        {% for question in latest_question %}
+            <li><a href="{% url 'EasyPoll:question' question.id %}">{{ question.text }}</a></li>
+        {% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+{% block content %}
+    <div class="container">
+        <h2>EasyPoll</h2>
+        <p class="lead">Welcome to EasyPoll!</p>
+        <div class="container center-block">
+            <div class="col-xs-6 col-md-4 well poll">
+                <div class="row">
+                    <h4 class="poll-highlight-title">Latest poll</h4>
+                </div>
+                {% if latest_question %}
+                    {% for question in latest_question %}
+                        <div class="row">
+                            <p class="poll-title">{{ question.text }}</p>
+                        </div>
+                        {% for choice in question.answer_set.all %}
+                            <div class="row">
+                                <p class="poll-answer">{{ choice.text }}</p>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                         aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                                        70%
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            <div class="col-xs-6 col-md-4 well poll">
+                <div class="row">
+                    <h4 class="poll-highlight-title">Latest poll</h4>
+                </div>
+                <div class="row">
+                    <p class="poll-title">Are you happy?</p>
+                </div>
+                <div class="row">
+                    <p class="poll-answer">Yes</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                             aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                            70%
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="poll-answer">No</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="20"
+                             aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                            20%
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="poll-answer">Do I have to answer?</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="10"
+                             aria-valuemin="0" aria-valuemax="100" style="width:10%">
+                            10%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4 well poll">
+                <div class="row">
+                    <h4 class="poll-highlight-title">Latest poll</h4>
+                </div>
+                <div class="row">
+                    <p class="poll-title">Are you happy?</p>
+                </div>
+                <div class="row">
+                    <p class="poll-answer">Yes</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                             aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                            70%
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="poll-answer">No</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="20"
+                             aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                            20%
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="poll-answer">Do I have to answer?</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="10"
+                             aria-valuemin="0" aria-valuemax="100" style="width:10%">
+                            10%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

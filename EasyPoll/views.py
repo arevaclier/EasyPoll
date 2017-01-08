@@ -11,7 +11,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question'
 
     def get_queryset(self):
-        """Return the last five published questions."""
+        """Return the last published questions."""
         return Question.objects.order_by('-published_date')[:1]
 
 class QuestionView(generic.DetailView):
