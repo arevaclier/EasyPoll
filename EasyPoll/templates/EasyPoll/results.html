@@ -4,7 +4,8 @@
     <div class="container">
         <h1>Results</h1>
         <div class="well">
-            <h3>{{ question.q_text }} - {{ poll_votes }} vote{{ poll_votes|pluralize }} total - By {{ question.author }} on {{ question.published_date|date }}</h3>
+            <h3>{{ question.q_text }} - {{ poll_votes }} vote{{ poll_votes|pluralize }} total - By {{ question.author }}
+                on {{ question.published_date|date }}</h3>
             {% for choice in question.answer_set.all %}
                 <div class="row well-padding">
                     <p class="poll-answer">{{ choice.a_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
@@ -15,12 +16,7 @@
                                     {% else %}
                                 0
                                 {% endif %}"
-                             aria-valuemin="0" aria-valuemax="100"
-                             style="width:{% if poll_votes > 0 %}
-                                 {{ choice.votes|div:poll_votes|mul:100|floatformat:"0" }}%
-                             {% else %}
-                                 0%
-                             {% endif %}">
+                             aria-valuemin="0" aria-valuemax="100">
                             {% if poll_votes > 0 %}
                                 {{ choice.votes|div:poll_votes|mul:100|floatformat:"0" }}%
                             {% else %}

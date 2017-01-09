@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'', include('EasyPoll.urls')),
     url(r'^login/$', auth_viewa.login, name='login'),
     url(r'^logout/$', auth_viewa.logout, {'next_page': 'EasyPoll:index'}, name='logout'),
-    url('^register/', CreateView.as_view(template_name='registration/register.html', form_class=UserCreationForm, success_url='/'))
+    url('^register/', CreateView.as_view(template_name='registration/register.html', form_class=UserCreationForm, success_url='/'), name='register'),
+    url('^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

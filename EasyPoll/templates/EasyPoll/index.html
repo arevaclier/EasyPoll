@@ -27,12 +27,7 @@
                                     {% else %}
                                         0
                                     {% endif %}"
-                                     aria-valuemin="0" aria-valuemax="100"
-                                     style="width:{% if latest_poll_votes > 0 %}
-                                         {{ choice.votes|div:latest_poll_votes|mul:100|floatformat:"0" }}%
-                                     {% else %}
-                                         0%
-                                     {% endif %}">
+                                     aria-valuemin="0" aria-valuemax="100">
 
                                     {% if latest_poll_votes > 0 %}
                                         {{ choice.votes|div:latest_poll_votes|mul:100|floatformat:"0" }}%
@@ -67,12 +62,7 @@
                                 {% else %}
                                     0
                                 {% endif %}"
-                                 aria-valuemin="0" aria-valuemax="100"
-                                 style="width:{% if month_poll_votes > 0 %}
-                                     {{ choice.votes|div:month_poll_votes|mul:100|floatformat:"0" }}%
-                                 {% else %}
-                                     0%
-                                 {% endif %}">
+                                 aria-valuemin="0" aria-valuemax="100">
 
                                 {% if month_poll_votes > 0 %}
                                     {{ choice.votes|div:month_poll_votes|mul:100|floatformat:"0" }}%
@@ -107,12 +97,7 @@
                                 {% else %}
                                     0
                                 {% endif %}"
-                                 aria-valuemin="0" aria-valuemax="100"
-                                 style="width:{% if highest_poll_votes > 0 %}
-                                     {{ choice.votes|div:highest_poll_votes|mul:100|floatformat:"0" }}%
-                                 {% else %}
-                                     0%
-                                 {% endif %}">
+                                 aria-valuemin="0" aria-valuemax="100">
 
                                 {% if highest_poll_votes > 0 %}
                                     {{ choice.votes|div:highest_poll_votes|mul:100|floatformat:"0" }}%

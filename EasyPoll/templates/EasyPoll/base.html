@@ -32,7 +32,7 @@
             <li><a href="{% url 'EasyPoll:addpoll' %}">New poll</a></li>
             <li><a href="{% url 'EasyPoll:list' %}">All polls</a></li>
             {% if user.is_anonymous %}
-                <li><a href="">Sign up</a> </li>
+                <li><a href={% url 'register' %}>Sign up</a> </li>
             <li><a href="{% url 'login' %}">Log in</a> </li>
             {% else %}
                 <li><a href="{% url 'EasyPoll:author' %}">My polls</a> </li>
@@ -61,6 +61,8 @@
         </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/anim.js' %}"></script>
 </body>
 </html>

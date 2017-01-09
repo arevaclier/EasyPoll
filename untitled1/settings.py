@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'EasyPoll',
     'mathfilters',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
