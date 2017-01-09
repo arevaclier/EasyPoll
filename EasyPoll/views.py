@@ -67,6 +67,16 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'EasyPoll/results.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ResultsView, self).get_context_data(*args, **kwargs)
+
+        answers = Answer.objects.filter(question_id=self.kwargs['pk'])
+        total_votes = 0
+        for i in answers:
+            total_votes = total_votes + i.votes
+        context['poll_votes'] = total_votes
+        return context
+
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -109,3 +119,15 @@ def addpoll(request):
 class ListView(generic.ListView):
     model = Question
     template_name = 'EasyPoll/list.html'
+    context_object_name = 'poll_list'
+    paginate_by = 10
+
+class AuthorView(generic.ListView):
+    model = Question
+    template_name = 'EasyPoll/author.html'
+    context_object_name = 'list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        qs = Question.objects.filter(author=self.request.user)
+        return qs

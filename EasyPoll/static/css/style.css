@@ -10,3 +10,12 @@ body {
 .poll {
     border: 1px dashed #60949a;
 }
+#add-poll input[type="text"] {
+    width: 100%;
+}
+.well-padding {
+    padding: 10px;
+}
+.well {
+    border-radius: 5px;
+}

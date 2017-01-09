@@ -1,16 +1,20 @@
 {% extends 'EasyPoll/base.html' %}
 {% block content %}
     <div class="container">
-<h1>{{ question_detail.q_text }}</h1>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <h1>Vote</h1>
+        <div class="well">
+            <h3>{{ question_detail.q_text }}</h3>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'EasyPoll:vote' question_detail.id %}" method="post">
-{% csrf_token %}
-{% for choice in question_detail.answer_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.a_text }}</label><br />
-{% endfor %}
-<input type="submit" value="Vote" class="btn btn-default"/>
-</form>
+            <form action="{% url 'EasyPoll:vote' question_detail.id %}" method="post">
+                {% csrf_token %}
+                {% for choice in question_detail.answer_set.all %}
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
+                    <label for="choice{{ forloop.counter }}">{{ choice.a_text }}</label><br/>
+                {% endfor %}
+                <input type="submit" value="Vote" class="btn btn-info"/>
+            </form>
+        </div>
+        <a href="{% url 'EasyPoll:index' %}"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
     </div>
 {% endblock %}

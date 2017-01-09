@@ -1,5 +1,7 @@
 from django import forms
 from .models import Question, Answer
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
 class AddQuestionForm(forms.ModelForm):
@@ -14,11 +16,8 @@ class AddQuestionForm(forms.ModelForm):
 
 
 class AddAnswerForm(forms.ModelForm):
+    a_text = forms.CharField(widget=forms.TextInput, label='Answer')
     class Meta:
         model = Answer
-        fields = ('a_text',)
-
-        def __init__(self, *args, **kwargs):
-            super(forms.ModelForm, self).__init__(*args, **kwargs)
-            self.fields['a_text'].label = 'Answer'
+        fields = ['a_text']
 

@@ -1,12 +1,38 @@
 {% extends 'EasyPoll/base.html' %}
+{% load mathfilters %}
 {% block content %}
-<div class="container">
-<h1>{{ question.q_text }}</h1>
-<ul>
-{% for choice in question.answer_set.all %}
-    <li>{{ choice.a_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
-<a href="{% url 'EasyPoll:vote' question.id %}">Vote again</a>
-</div>
+    <div class="container">
+        <h1>Results</h1>
+        <div class="well">
+            <h3>{{ question.q_text }} - {{ poll_votes }} vote{{ poll_votes|pluralize }} total - By {{ question.author }} on {{ question.published_date|date }}</h3>
+            {% for choice in question.answer_set.all %}
+                <div class="row well-padding">
+                    <p class="poll-answer">{{ choice.a_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar"
+                             aria-valuenow="{% if poll_votes > 0 %}
+                                {{ choice.votes|div:poll_votes|mul:100|floatformat:"0" }}
+                                    {% else %}
+                                0
+                                {% endif %}"
+                             aria-valuemin="0" aria-valuemax="100"
+                             style="width:{% if poll_votes > 0 %}
+                                 {{ choice.votes|div:poll_votes|mul:100|floatformat:"0" }}%
+                             {% else %}
+                                 0%
+                             {% endif %}">
+                            {% if poll_votes > 0 %}
+                                {{ choice.votes|div:poll_votes|mul:100|floatformat:"0" }}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <a href="{% url 'EasyPoll:index' %}"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+        </div>
+    </div>
 {% endblock %}

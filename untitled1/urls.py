@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views as auth_viewa
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('EasyPoll.urls'))
+    url(r'', include('EasyPoll.urls')),
+    url(r'^login/$', auth_viewa.login, name='login'),
+    url(r'^logout/$', auth_viewa.logout, {'next_page': 'EasyPoll:index'}, name='logout'),
+    url('^register/', CreateView.as_view(template_name='registration/register.html', form_class=UserCreationForm, success_url='/'))
 ]

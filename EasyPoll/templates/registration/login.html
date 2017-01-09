@@ -1,0 +1,13 @@
+{% extends 'EasyPoll/base.html' %}
+{% block content %}
+    <div class="container">
+        <h3>Login</h3>
+        <div class="well">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-info">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

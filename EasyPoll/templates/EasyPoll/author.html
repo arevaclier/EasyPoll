@@ -2,15 +2,17 @@
 {% block content %}
     <div class="container">
     <div class="well">
-        {% if poll_list.count > 0 %}
-            {% for poll in poll_list %}
+        {% if list.count > 0 %}
+            {% for poll in list %}
                 <div class="row well-padding">
                 <span class="pull-left">{{ poll.q_text }} - By {{ poll.author }} on {{ poll.published_date|date }}</span><span class="pull-right"><a href="{% url 'EasyPoll:results' poll.id %}">Results <i class="glyphicon glyphicon-chevron-right"></i> </a></span>
                 </div>
                 <hr/>
             {% endfor %}
             {% else %}
-            <div class="row well-padding">No polls have been found</div>
+            <div class="row well-padding">
+            <p>You have not created any polls yet.</p>
+            </div>
         {% endif %}
     </div>
     {% if page_obj %}

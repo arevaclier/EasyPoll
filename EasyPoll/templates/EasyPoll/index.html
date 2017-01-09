@@ -12,24 +12,39 @@
                 {% if latest_question %}
 
                     <div class="row">
-                        <p class="poll-title">{{ latest_question.q_text }} - {{ latest_poll_votes }} votes total</p>
+                        <p class="poll-title"><a
+                                href="{% url 'EasyPoll:results' latest_question.id %}">{{ latest_question.q_text }}
+                            - {{ latest_poll_votes }} vote{{ latest_poll_votes|pluralize }} total - By {{ latest_question.author }}</a></p>
                     </div>
                     {% for choice in latest_question.answer_set.all %}
                         <div class="row">
-                            <p class="poll-answer">{{ choice.a_text }} - {{ choice.votes }} votes</p>
+                            <p class="poll-answer">{{ choice.a_text }} - {{ choice.votes }}
+                                vote{{ choice.votes|pluralize }}</p>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar"
-                                     aria-valuenow="{{ choice.votes|div:latest_poll_votes|mul:100 }}"
+                                     aria-valuenow="{% if latest_poll_votes > 0 %}
+                                        {{ choice.votes|div:latest_poll_votes|mul:100|floatformat:"0" }}
+                                    {% else %}
+                                        0
+                                    {% endif %}"
                                      aria-valuemin="0" aria-valuemax="100"
-                                     style="width:{{ choice.votes|div:latest_poll_votes|mul:100 }}%">
+                                     style="width:{% if latest_poll_votes > 0 %}
+                                         {{ choice.votes|div:latest_poll_votes|mul:100|floatformat:"0" }}%
+                                     {% else %}
+                                         0%
+                                     {% endif %}">
 
-                                    {{ choice.votes|div:latest_poll_votes|mul:100|floatformat:"0" }}%
+                                    {% if latest_poll_votes > 0 %}
+                                        {{ choice.votes|div:latest_poll_votes|mul:100|floatformat:"0" }}%
+                                    {% else %}
+                                        0%
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                     <div class="row pull-right">
-                        <a href="{% url 'EasyPoll:vote' latest_question.id %}">Vote</a>
+                        <a href="{% url 'EasyPoll:vote' latest_question.id %}">Vote <i class="glyphicon glyphicon-chevron-right"></i> </a>
                     </div>
                     </div>
                 {% endif %}
@@ -38,24 +53,38 @@
                     <h4 class="poll-highlight-title">Poll of the month</h4>
                 </div>
                 <div class="row">
-                    <p class="poll-title">{{ month_poll.q_text }} - {{ month_poll_votes }} votes total</p>
+                    <p class="poll-title"><a href="{% url 'EasyPoll:results' month_poll.id %}">{{ month_poll.q_text }}
+                        - {{ month_poll_votes }} vote{{ month_poll_votes|pluralize }} total - By {{ month_poll.author }}</a></p>
                 </div>
                 {% for choice in month_poll.answer_set.all %}
                     <div class="row">
-                        <p class="poll-answer">{{ choice.a_text }} - {{ choice.votes }} votes</p>
+                        <p class="poll-answer">{{ choice.a_text }} - {{ choice.votes }}
+                            vote{{ choice.votes|pluralize }}</p>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar"
-                                 aria-valuenow="{{ choice.votes|div:month_poll_votes|mul:100 }}"
+                                 aria-valuenow="{% if month_poll_votes > 0 %}
+                                    {{ choice.votes|div:month_poll_votes|mul:100|floatformat:"0" }}
+                                {% else %}
+                                    0
+                                {% endif %}"
                                  aria-valuemin="0" aria-valuemax="100"
-                                 style="width:{{ choice.votes|div:month_poll_votes|mul:100 }}%">
+                                 style="width:{% if month_poll_votes > 0 %}
+                                     {{ choice.votes|div:month_poll_votes|mul:100|floatformat:"0" }}%
+                                 {% else %}
+                                     0%
+                                 {% endif %}">
 
-                                {{ choice.votes|div:month_poll_votes|mul:100|floatformat:"0" }}%
+                                {% if month_poll_votes > 0 %}
+                                    {{ choice.votes|div:month_poll_votes|mul:100|floatformat:"0" }}%
+                                {% else %}
+                                    0%
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
                 <div class="row pull-right">
-                    <a href="{% url 'EasyPoll:vote' month_poll.id %}">Vote</a>
+                    <a href="{% url 'EasyPoll:vote' month_poll.id %}">Vote <i class="glyphicon glyphicon-chevron-right"></i> </a>
                 </div>
             </div>
             <div class="col-xs-6 col-md-4 well poll">
@@ -63,25 +92,43 @@
                     <h4 class="poll-highlight-title">Most voted poll</h4>
                 </div>
                 <div class="row">
-                    <p class="poll-title">{{ highest_poll.q_text }} - {{ highest_poll_votes }} votes total</p>
+                    <p class="poll-title"><a
+                            href="{% url 'EasyPoll:results' highest_poll.id %}">{{ highest_poll.q_text }}
+                        - {{ highest_poll_votes }} vote{{ highest_poll_votes|pluralize }} total - By {{ highest_poll.author }}</a></p>
                 </div>
                 {% for choice in highest_poll.answer_set.all %}
                     <div class="row">
-                        <p class="poll-answer">{{ choice.a_text }} - {{ choice.votes }} votes</p>
+                        <p class="poll-answer">{{ choice.a_text }} - {{ choice.votes }}
+                            vote{{ choice.votes|pluralize }}</p>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar"
-                                 aria-valuenow="{{ choice.votes|div:highest_poll_votes|mul:100 }}"
+                                 aria-valuenow="{% if highest_poll_votes > 0 %}
+                                    {{ choice.votes|div:highest_poll_votes|mul:100|floatformat:"0" }}
+                                {% else %}
+                                    0
+                                {% endif %}"
                                  aria-valuemin="0" aria-valuemax="100"
-                                 style="width:{{ choice.votes|div:highest_poll_votes|mul:100 }}%">
+                                 style="width:{% if highest_poll_votes > 0 %}
+                                     {{ choice.votes|div:highest_poll_votes|mul:100|floatformat:"0" }}%
+                                 {% else %}
+                                     0%
+                                 {% endif %}">
 
-                                {{ choice.votes|div:highest_poll_votes|mul:100|floatformat:"0" }}%
+                                {% if highest_poll_votes > 0 %}
+                                    {{ choice.votes|div:highest_poll_votes|mul:100|floatformat:"0" }}%
+                                {% else %}
+                                    0%
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
                 <div class="row pull-right">
-                    <a href="{% url 'EasyPoll:vote' month_poll.id %}">Vote</a>
+                    <a href="{% url 'EasyPoll:vote' month_poll.id %}">Vote <i class="glyphicon glyphicon-chevron-right"></i> </a>
                 </div>
+            </div>
+            <div class="row pull-right">
+                <a href="{% url 'EasyPoll:addpoll' %}">New poll <i class="glyphicon glyphicon-chevron-right"></i> </a>
             </div>
         </div>
 {% endblock %}

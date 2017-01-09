@@ -3,7 +3,12 @@
     <div class="container">
     <h1>Add new poll</h1>
     <div class="well">
-    <form method="post" class="post-form">
+    {% if user %}
+        <h5>You are known as <i class="font-italic">{{ user }}</i></h5>
+    {% else %}
+        <h5>You are known as <i class="font-italic"></i>Anonymous</h5>
+    {% endif %}
+    <form method="post" class="post-form" id="add-poll">
         {% csrf_token %}
         {{ qform.as_p }}
         {% for form in aforms %}
@@ -11,6 +16,9 @@
         {% endfor %}
         <button type="submit" class="btn btn-info">Add</button>
     </form>
+    </div>
+    <div class="row">
+        <a href="{% url 'EasyPoll:index' %}"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
     </div>
     </div>
 {% endblock %}
