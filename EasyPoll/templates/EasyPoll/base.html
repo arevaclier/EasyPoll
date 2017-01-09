@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>EasyPoll - Design Dev</title>
+    <title>EasyPoll</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -24,21 +24,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">EasyPoll</a>
+        <a class="navbar-brand" href="{% url 'EasyPoll:index' %}">EasyPoll</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </li>
+            <li><a href="{% url 'EasyPoll:addpoll' %}">New poll</a></li>
+            <li><a href="{% url 'EasyPoll:list' %}">All polls</a></li>
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
@@ -52,7 +44,7 @@
                 <hr/>
                 <div class="col-lg-12">
                     <div class="col-xs-4">
-                        <a href = "#">Github</a>
+                        <a href = "https://github.com/arevaclier/EasyPoll">Github</a>
                     </div>
                     <div class="col-xs-8">
                         <p class="text-muted pull-right">Arthur Revaclier 2016</p>

@@ -1,0 +1,16 @@
+{% extends 'EasyPoll/base.html' %}
+{% block content %}
+    <div class="container">
+    <h1>Add new poll</h1>
+    <div class="well">
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {{ qform.as_p }}
+        {% for form in aforms %}
+            {{ form.as_p }}
+        {% endfor %}
+        <button type="submit" class="btn btn-info">Add</button>
+    </form>
+    </div>
+    </div>
+{% endblock %}

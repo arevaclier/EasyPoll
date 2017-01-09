@@ -1,0 +1,12 @@
+{% extends 'EasyPoll/base.html' %}
+{% block content %}
+<div class="container">
+<h1>{{ question.q_text }}</h1>
+<ul>
+{% for choice in question.answer_set.all %}
+    <li>{{ choice.a_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+<a href="{% url 'EasyPoll:vote' question.id %}">Vote again</a>
+</div>
+{% endblock %}
